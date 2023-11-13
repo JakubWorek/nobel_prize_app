@@ -7,7 +7,7 @@ from '@mui/material';
 
 interface Prize {
   awardYear: string,
-  categoryFullName: {
+  category: {
     en: string;
     no: string;
     se: string;
@@ -51,7 +51,7 @@ export default function Home() {
   }
 
   return (
-    <Box sx={{ minWidth: 120, padding: 2, borderRadius: 2, boxShadow: 3 }} >
+    <Box sx={{ minWidth: 120, padding: 2, borderRadius: 2, boxShadow: 5, display: "flex-row", justifyContent: "center", alignItems: "center" }} >
       <h1>🏆 Nobel Prize App 🏆</h1>
       <Box sx={{ minWidth: 120, gap:1 }} component="form" onSubmit={handleSubmit}>
         <FormControl fullWidth>
