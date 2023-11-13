@@ -24,6 +24,15 @@ export default function PrizeTable() {
       return await fetch('https://api.nobelprize.org/2.1/nobelPrizes')
                       .then(response => response.json())
                       .then(data => data.nobelPrizes)
+                      .then( (data: Prize[]) => {
+                        if (validateLanguage(language) && validateYear(data, year)) {
+                          const filteredPrizes = filterByCategory(data.filter(prize => prize.awardYear === year), category);
+                          setPrizes(filteredPrizes);
+                        } else {
+                          navigate('/');
+                        }
+                      })
+                      .catch(error => console.log(error));
     };
 
     const filterByCategory = (data: Prize[], category: string | undefined) => {
@@ -34,16 +43,6 @@ export default function PrizeTable() {
     };
 
     fetchData()
-      .then( (data: Prize[]) => {
-        if (validateLanguage(language) && validateYear(data, year)) {
-          const filteredPrizes = filterByCategory(data.filter(prize => prize.awardYear === year), category);
-          setPrizes(filteredPrizes);
-        } else {
-          navigate('/');
-        }
-      })
-      .catch(error => console.log(error));
-
   }, [language, year, category, navigate])
 
   const sortByCategory = () => {
@@ -96,7 +95,7 @@ export default function PrizeTable() {
               <TableRow key={id}>
                 <TableCell align="left">{prize.awardYear}</TableCell>
                 <TableCell align="right">{prize.category[language as languageType]}</TableCell>
-                <TableCell align="right">{prize.dateAwarded?.split("-").reverse().join(".")}</TableCell>
+                <TableCell align="right">{prize.dateAwarded ? prize.dateAwarded?.split("-").reverse().join(".") : "N/A"}</TableCell>
                 <TableCell align="right">{prize.prizeAmount.toLocaleString()}</TableCell>
               </TableRow>
             ))}

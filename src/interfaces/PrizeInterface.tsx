@@ -6,5 +6,5 @@ export interface Prize {
     se: string;
   },
   dateAwarded: string,
-  prizeAmount: string
+  prizeAmount: number,
 }

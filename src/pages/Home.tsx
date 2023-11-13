@@ -18,13 +18,13 @@ export default function Home() {
       return await fetch('https://api.nobelprize.org/2.1/nobelPrizes')
                       .then(response => response.json())
                       .then(data => data.nobelPrizes)
+                      .then((data: Prize[]) => {
+                        setAvailableYears(Array.from(new Set(data.map(prize => prize.awardYear))));
+                      })
+                      .catch(error => console.log(error));
     };
 
     fetchData()
-      .then((data: Prize[]) => {
-        setAvailableYears(Array.from(new Set(data.map(prize => prize.awardYear))));
-      })
-      .catch(error => console.log(error));
   }, [])
 
   const handleYearChange = (event : SelectChangeEvent ) => {
