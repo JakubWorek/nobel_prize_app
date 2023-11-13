@@ -8,10 +8,22 @@ Aby uruchomić aplikację wykonaj następujące kroki:
 - Uruchom konsolę
 - Wykonaj komendę `git clone https://github.com/JakubWorek/nobel_prize_app.git`
 - Po sklonowaniu repozytorium ykonaj komendę `cd nobel_prize_app`
-- Wykonaj komendę `npm install` w celu zainstalowania wymaganych modułów
+- Wykonaj komendę `npm install` w celu zainstalowania wymaganych pakietów
 - Wykonaj komendę `npm start` w celu uruchomienia aplikacji
 
 Aplikacja będzie dostępna pod adresem http://localhost:3000/ po zakończeniu powyższych czynności
+
+## O aplikacji
+
+Zaimplementowane zostało sortowanie tabeli według nazwy katergorii oraz daty przyznania.  
+Po najechaniu na nazwę kolumny ukazuje się strzałka wskazująca kierunek sortowania.
+Dodatkowo nad tabelą znajduje się pole tekstowe pozwalające przefiltrować tabelę  
+w celu uzyskania nagrody w poszukiwanej kategorii.
+
+Wpisanie niepoprawnego adresu w pole wyszukiwarki spowoduje przekierowanie na stronę główną.
+Do modelowania interfejsu użytkownika zastosowałem Material UI.  
+
+Będę wdzięczy, za każdy feedback odnoszący się do aplikacji (Co mogło zostać wykonane lepiej?).
 
 ## Kilka słów o mnie, dlaczego ja?
 
