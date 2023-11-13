@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Prize } from '../interfaces/PrizeInterface';
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import {  Box, MenuItem, FormControl, FormControlLabel, 
           FormLabel, InputLabel, Button, RadioGroup, Radio } 
 from '@mui/material';
-
-interface Prize {
-  awardYear: string,
-  category: {
-    en: string;
-    no: string;
-    se: string;
-  },
-  dateAwarded: string,
-  prizeAmount: number
-}
 
 export default function Home() {
   const [selectedYear, setSelectedYear] = useState<string>('');
@@ -79,7 +69,7 @@ export default function Home() {
             <FormControlLabel value="no" control={<Radio />} label="Norwegian" />
             <FormControlLabel value="se" control={<Radio />} label="Swedish" />
           </RadioGroup>
-          <Button disabled={selectedYear === "" || selectedLanguage === ""} variant="outlined" type="submit" >Search for prizes</Button>
+          <Button disabled={selectedYear === "" || selectedLanguage === ""} variant="contained" type="submit" >Search for prizes</Button>
         </FormControl>
       </Box>
     </Box>

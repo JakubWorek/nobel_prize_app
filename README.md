@@ -18,4 +18,9 @@ Aplikacja będzie dostępna pod adresem http://localhost:3000/ po zakończeniu p
 Jestem studentem drugiego roku informatyki. Rozwijam się na ścieżce Wytwarzania Oprogramowania.  
 Chciałbym wziąć udział w projekcie koła naukowego, by umocnić podstawy, które posiadam.  
 Wieżę, że moja wiedza przełoży się na solidny wkład w rozwój projektu.  
-W czasie trwania projektu chciałbym umocnić swoje umiejetności pracy w zespole przy tworzeniu projektu.  
+Mimo iż nie posiadam zawodowego doświadczenia, uważam, że podołam postawionym wyzwaniom  
+i pieczałowicie wykonam powierzone mi obowiązki.  
+W czasie trwania projektu chciałbym umocnić swoje umiejetności pracy w zespole  
+oraz zdobyć praktyczne doświadczenie w obszarze wytwarzania oprogramowania.  
+Praca w, ufam, zgranym zespole pozwoli mi rozwinąć umiejętności komunikacji  
+i efektywnego rozwiązywania problemów.

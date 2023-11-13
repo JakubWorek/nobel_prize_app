@@ -1,18 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Prize } from '../interfaces/PrizeInterface';
 import {  Table, TableHead, TableBody, TableRow, TableContainer, TableCell, TableSortLabel, 
-          Box, Paper, Button, FormControl, InputLabel, Input} from '@mui/material';
-
-interface Prize {
-  awardYear: string,
-  category: {
-    en: string;
-    no: string;
-    se: string;
-  },
-  dateAwarded: string,
-  prizeAmount: number
-}
+          Box, Paper, Button, FormControl, InputLabel, Input } from '@mui/material';
 
 const languages = ['en', 'no', 'se'];
 type languageType = "en" | "no" | "se";
@@ -114,7 +104,7 @@ export default function PrizeTable() {
         </Table>
       </TableContainer>
       <Box component="div" sx={{marginTop: 2}}>
-        <Button variant="contained" onClick={handleBack} sx={{ boxShadow: 5 }}>Back</Button>
+        <Button variant="contained" onClick={handleBack} sx={{ boxShadow: 5 }}>Back to home page</Button>
       </Box>
     </Box>
   )
