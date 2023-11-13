@@ -18,5 +18,4 @@ Aplikacja będzie dostępna pod adresem http://localhost:3000/ po zakończeniu p
 Jestem studentem drugiego roku informatyki. Rozwijam się na ścieżce Wytwarzania Oprogramowania.  
 Chciałbym wziąć udział w projekcie koła naukowego, by umocnić podstawy, które posiadam.  
 Wieżę, że moja wiedza przełoży się na solidny wkład w rozwój projektu.  
-Jestem gotów uczestniczyć w projekcie.  
 W czasie trwania projektu chciałbym umocnić swoje umiejetności pracy w zespole przy tworzeniu projektu.  
