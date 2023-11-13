@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Prize } from '../interfaces/PrizeInterface';
+import { fetchData } from '../api/fetchData';
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import {  Box, MenuItem, FormControl, FormControlLabel, 
           FormLabel, InputLabel, Button, RadioGroup, Radio } 
@@ -14,17 +15,11 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      return await fetch('https://api.nobelprize.org/2.1/nobelPrizes')
-                      .then(response => response.json())
-                      .then(data => data.nobelPrizes)
-                      .then((data: Prize[]) => {
-                        setAvailableYears(Array.from(new Set(data.map(prize => prize.awardYear))));
-                      })
-                      .catch(error => console.log(error));
-    };
-
     fetchData()
+      .then((data: Prize[]) => {
+        setAvailableYears(Array.from(new Set(data.map(prize => prize.awardYear))));
+      })
+      .catch(error => console.log(error));
   }, [])
 
   const handleYearChange = (event : SelectChangeEvent ) => {

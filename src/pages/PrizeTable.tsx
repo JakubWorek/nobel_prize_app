@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Prize } from '../interfaces/PrizeInterface';
+import { fetchData } from '../api/fetchData';
 import {  Table, TableHead, TableBody, TableRow, TableContainer, TableCell, TableSortLabel, 
           Box, Paper, Button, FormControl, InputLabel, Input } from '@mui/material';
 
@@ -14,36 +15,22 @@ export default function PrizeTable() {
   const [prizes, setPrizes] = useState<Prize[]>([]);
   const [sortCategory, setSortCategory] = useState<boolean>(false);
   const [sortDateAwarded, setSortDateAwarded] = useState<boolean>(false);
-  const [category, setCategory] = useState<string | undefined>(undefined);
+  const [filterText, setFilterText] = useState<string | undefined>(undefined);
 
   const {language, year} = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      return await fetch('https://api.nobelprize.org/2.1/nobelPrizes')
-                      .then(response => response.json())
-                      .then(data => data.nobelPrizes)
-                      .then( (data: Prize[]) => {
-                        if (validateLanguage(language) && validateYear(data, year)) {
-                          const filteredPrizes = filterByCategory(data.filter(prize => prize.awardYear === year), category);
-                          setPrizes(filteredPrizes);
-                        } else {
-                          navigate('/');
-                        }
-                      })
-                      .catch(error => console.log(error));
-    };
-
-    const filterByCategory = (data: Prize[], category: string | undefined) => {
-      if (!category) {
-        return data;
-      }
-      return data.filter(prize => prize.category[language as languageType].toLowerCase().includes(category.toLowerCase()));
-    };
-
     fetchData()
-  }, [language, year, category, navigate])
+      .then( (data: Prize[]) => {
+        if (validateLanguage(language) && validateYear(data, year)) {
+          setPrizes(data);
+        } else {
+          navigate('/');
+        }
+      })
+      .catch(error => console.log(error));
+  }, [language, year, navigate])
 
   const sortByCategory = () => {
     const sortedPrizes = prizes.sort((a, b) => a.category[language as languageType].localeCompare(b.category[language as languageType]))
@@ -58,12 +45,25 @@ export default function PrizeTable() {
   }
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCategory(event.target.value);
+    setFilterText(event.target.value);
   };
 
   const handleBack = () => {
     navigate('/');
   }
+
+  const filterByCategory = (data: Prize[], category: string | undefined) => {
+    if (!category) {
+      return data;
+    }
+    return data.filter(prize => prize.category[language as languageType].toLowerCase().includes(category.toLowerCase()));
+  };
+
+  const getDataForTable = (data: Prize[]) => {
+    return filterByCategory(data.filter(prize => prize.awardYear === year), filterText);
+  }
+
+  const dataForTable = getDataForTable(prizes)
 
   return (
     <Box sx={{ minWidth: 120, padding: 2, borderRadius: 2, boxShadow: 5, textAlign: "center"}}>
@@ -71,7 +71,7 @@ export default function PrizeTable() {
       <Box component="form" sx={{padding: 2}}>
         <FormControl fullWidth>
           <InputLabel htmlFor="category">Filter by category</InputLabel>
-          <Input id="category" value={category} onChange={handleFilterChange} />
+          <Input id="category" value={filterText} onChange={handleFilterChange} />
         </FormControl>
       </Box>
       <TableContainer component={Paper} sx={{ boxShadow: 3 }}>
@@ -91,7 +91,7 @@ export default function PrizeTable() {
             <TableCell align="right">Prize amount</TableCell>
           </TableHead>
           <TableBody>
-            {prizes.map((prize, id) => (
+            {dataForTable.map((prize, id) => (
               <TableRow key={id}>
                 <TableCell align="left">{prize.awardYear}</TableCell>
                 <TableCell align="right">{prize.category[language as languageType]}</TableCell>
